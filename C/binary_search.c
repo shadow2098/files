@@ -1,6 +1,6 @@
 #include "stdio.h"
 
-int  binary_search_fun(int* arr, int num);
+int binary_search_fun(int* arr, int arr_lenght, int requested_num);
 
 int main () {
 
@@ -20,12 +20,34 @@ int main () {
 									81, 82, 83, 84, 85, 86, 87, 88, 89, 90,
 										91, 92, 93, 94, 95, 96, 97, 98, 99, 100};
 	
-	binary_search_fun(arr, num);
-	printf("%d\n", num);
-	printf("%d\n", arr[0]);
+	int arr_lenght = sizeof(arr) / sizeof(int);
+	binary_search_fun(arr, arr_lenght, num);
+
 	return 0;
 }
 
 
 
-//int binary_search()
+int binary_search_fun(int* arr, int arr_lenght, int requested_num) {
+
+	int max_num = arr_lenght;
+	int min_num = 1;
+	int avg = ((max_num + min_num) / 2);
+
+	for (int i = 0; i < arr_lenght; i++) {
+		printf("%d\n", avg);
+		if (arr[avg] == requested_num) {
+			printf("Requested number is %d\n", arr[avg]);
+			break;
+		} else if (arr[avg] > requested_num) {
+			max_num = avg - 1;
+			avg = ((max_num + min_num) / 2);
+		} else if (arr[avg] < requested_num) {
+			min_num = avg + 1;
+			avg = ((max_num + min_num) / 2);
+		}
+	}
+
+	return 0;
+
+}

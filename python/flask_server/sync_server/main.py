@@ -1,5 +1,7 @@
+import time
 from flask import Flask
 from flask import request
+
 
 
 app = Flask(__name__)
@@ -8,7 +10,7 @@ app = Flask(__name__)
 def main_fun():
 
     if request.method == "GET":
-        print("hello")
+        time.sleep(15)
         return "Hello. Function started"
         
     return "Hello. Function started"

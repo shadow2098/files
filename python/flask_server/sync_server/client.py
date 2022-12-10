@@ -8,5 +8,6 @@ def get_response():
 
 start = time.time()
 get_response()
+time.sleep(5)
 finish = time.time()
-print(start - finish)
+print(finish - start)

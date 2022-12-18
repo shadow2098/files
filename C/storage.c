@@ -1,52 +1,44 @@
-/*
-Сделать в программе хранилище пользователей сайта. 
-Каждый пользователь описывается числовыми данными - 
-	рост, вес, год рождения и баланс. 
-Все эти данные о пользователе нужно хранить в структуре (struct). 
-Все пользователи будут храниться в большом массиве структур 
-	(User arr[], где User - это структура)
-Добавить функции для фильтрации по каждому из параметров пользователя 
-(вывести всех пользователей у которых баланс больше какого-то числа, 
-	у которых рост меньше какого-то числа)
-*/
-
+#include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 struct User_storage {
-	int age;
-	int weight;
-	int height;
-	int birth_year;
-	int balance;
+    int age;
+    int weight;
+    int height;
+    int birth_year;
+    int balance;
 };
 typedef struct User_storage User;
 
 
 
-
-
-
 int main() {
+    srand(time(NULL));
 
-	int num;
-	for (int i = 0; i < 2; ++i) {
-		printf("Please, insert data for user creation: \n");
+    User user_arr[100];
+    int user_count = 0;
 
-		printf("Please insert age: ");
-		scanf("%d", &num);
+    for (int i = 0; i < 100; ++i) {
+        User user;
 
-		printf("Please insert weight: ");
-		scanf("%d", &num);
+        user.age = rand() % 50;
+        user.weight = rand() % 100;
+        user.height = rand() % 200;
+        user.birth_year = rand() % 10;
+        user.balance = rand() % 10000;
 
-		printf("Please insert height: ");
-		scanf("%d", &num);
+        user_arr[i] = user;
+        user_count += 1;
+    }
 
-		printf("Please insert birth_year: ");
-		scanf("%d", &num);
+    for (int i = 0; i < user_count; i++) {
 
-		printf("Please insert balance: ");
-		scanf("%d", &num);
-	}
+        if (user_arr[i].height > 180) {
+            printf("User id: %d\n", i);
+        }
 
-	return 0;
+    }
+
+    return 0;
 }

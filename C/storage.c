@@ -22,10 +22,10 @@ int main() {
     for (int i = 0; i < 100; ++i) {
         User user;
 
-        user.age = rand() % 50;
-        user.weight = rand() % 100;
-        user.height = rand() % 200;
-        user.birth_year = rand() % 10;
+        user.age = 10 + rand() % 40;
+        user.weight = 60 + rand() % 40;
+        user.height = 120 + rand() % 80;
+        user.birth_year = 2023 - user.age;
         user.balance = rand() % 10000;
 
         user_arr[i] = user;
@@ -35,7 +35,9 @@ int main() {
     for (int i = 0; i < user_count; i++) {
 
         if (user_arr[i].height > 180) {
-            printf("User id: %d\n", i);
+            printf("User id: %d ||| User age: %d ||| User birth year: %d\n",
+             i, user_arr[i].age, user_arr[i].birth_year
+             );
         }
 
     }

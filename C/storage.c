@@ -14,18 +14,23 @@ typedef struct User_storage User;
 
 
 int main() {
-    srand(time(NULL));
+
+    time_t cur_time = time(NULL);
+    struct tm *gm_time = gmtime(&cur_time);
+    int cur_year = gm_time->tm_year;
 
     User user_arr[100];
     int user_count = 0;
 
+    srand(time(NULL));
     for (int i = 0; i < 100; ++i) {
         User user;
+
 
         user.age = 10 + rand() % 40;
         user.weight = 60 + rand() % 40;
         user.height = 120 + rand() % 80;
-        user.birth_year = 2023 - user.age;
+        user.birth_year = 1900 + cur_year - user.age;
         user.balance = rand() % 10000;
 
         user_arr[i] = user;

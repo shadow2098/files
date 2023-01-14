@@ -1,14 +1,8 @@
- /*
- Создать массив чисел.
- Запросить у пользователя индекс элемента.
- Удалить элемент с этим индексом
- */
-
 #include <stdio.h>
 #include <time.h>
 
 int main() {
-    //srand(time(NULL));
+
     int index;
     printf("Insert index: ");
     scanf("%d", &index);
@@ -20,13 +14,9 @@ int main() {
     }
 
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 9; i++) {
         printf("%d\n", num_arr[i]);
     }
-    /*
-    for (int i; i = 0; i < 10; i++) {
-        printf("%d ",num_arr[i]);
-    }
-    */
+
     return 0;
 }

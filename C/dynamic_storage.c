@@ -1,3 +1,5 @@
+// динамический массив
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
@@ -11,13 +13,11 @@ struct User_storage {
 };
 typedef struct User_storage User;
 
-
-
-void user_filtration_by_height(User *arr, int lenght) {
-    for (int i = 0; i < lenght; ++i) {
+void user_filtration_by_height(User* arr, int length) {
+    for (int i = 0; i < length; ++i) {
         if (arr[i].height > 180) {
-            printf("User id: %d ||| User age: %d ||| User birth year: %d\n",
-            i, arr[i].age, arr[i].birth_year
+            printf("User id: %d ||| User height: %d ||| User age: %d ||| User birth year: %d\n",
+            i, arr[i].height, arr[i].age, arr[i].birth_year
             );
         }
     }
@@ -25,7 +25,8 @@ void user_filtration_by_height(User *arr, int lenght) {
 
 int user_deletion(User *arr, int lenght) {
 
-   for (int i = 0; i < lenght;) {
+    int arr_length = lenght;
+    for (int i = 0; i < lenght;) {
 
         if (arr[i].birth_year >= 2000) {
             for (int j = i; j < lenght - 1; ++j) {
@@ -37,6 +38,7 @@ int user_deletion(User *arr, int lenght) {
         }
     }
 
+    arr = (User*) realloc(arr, (arr_length - lenght) * sizeof(int));
     return lenght;
 }
 
@@ -47,11 +49,18 @@ int main() {
     struct tm *gm_time = gmtime(&cur_time);
     int cur_year = gm_time->tm_year;
 
-    User user_arr[100];
+
     int arr_length = 100;
+    User* user_arr = (User*) malloc(arr_length * sizeof(int));
+
+    if (user_arr == NULL) {
+        printf("Issue while alllocation of memory occurred");
+        return 0;
+    }
+
 
     srand(time(NULL));
-    for (int i = 0; i < 100; ++i) {
+    for (int i = 0; i < arr_length; ++i) {
         User user;
 
         user.age = 10 + rand() % 40;
@@ -63,6 +72,13 @@ int main() {
         user_arr[i] = user;
     }
 
+
+    for (int i = 0; i < arr_length; ++i) {
+        printf("%d\n", user_arr[i].birth_year);
+    }
+
+    printf("\n\n\n\n\n");
+
     // user_filtration_by_height(user_arr, arr_length);
 
     int user_count = user_deletion(user_arr, arr_length);
@@ -72,5 +88,6 @@ int main() {
         printf("%d\n", user_arr[i].birth_year);
     }
 
+    free(user_arr);
     return 0;
 }

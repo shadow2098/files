@@ -26,6 +26,7 @@ int main() {
     printf("\n\n\n\n\n");
     (*double_pointer) (&arr, len);
 
+
     return 0;
 }
 

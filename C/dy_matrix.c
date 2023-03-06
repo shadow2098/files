@@ -43,6 +43,8 @@ int main() {
 
 
     // int arr_len = (int) sizeof(res1.Avg_Arr) / sizeof(int);
+    // printf("%d\n\n", arr_len);
+
     for (int i = 0; i < 20; ++i) {
         printf("Avg arr %d - %d\n", i + 1, res1.Avg_Arr[i]);
     }
@@ -118,10 +120,7 @@ res find_avg_and_max(int** matrix, int rows, int cols) {
     for (int j = 0; j < cols; ++j) {
         for (int i = 0; i < rows; ++i) {
             avg += matrix[i][j];
-            printf("%d", i);
         }
-        printf("\n");
-        printf("Max - %d || Avg - %d\n", max, avg);
         avg_arr[j] = avg / 10;
         if (avg > max) {
             max = avg;

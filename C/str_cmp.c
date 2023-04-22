@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 
-int compare_str(char* str, char* str1);
+int compare_str(char* str1, char* str2);
 
 
 int main() {
 	char str1[] = "abcd";
-	char str2[] = "a\0bcd";
+	char str2[] = "abc";
 	int res, res1;
 
 	res = strcmp(str1, str2);
@@ -20,13 +20,36 @@ int main() {
 
 
 int compare_str(char* str1, char* str2) {
-	int i = 0;
-	while ((str1[i] != '\0') || (str2[i] != '\0')) {
-		if (str1[i] != str2[i]) {
-			int res = (int) str1[i] - (int) str2[i];
-			return res;
+	int len = (int) (sizeof(str1) - sizeof(str2));
+	// printf("%d\n", len);
+
+	if (len > 0) {
+		for (int i = 0; i < ((int) sizeof(str1)); ++i) {
+			if (str1[i] == str2[i]) {
+				continue;
+			} else {
+				// printf("First IF - %d\n", (int) (str1[i] - str2[i]));
+				return (int) (str1[i] - str2[i]);
+			}
 		}
-		++i;
+	} else if (len < 0) {
+		for (int i = 0; i < ((int) sizeof(str2)); ++i) {
+			if (str1[i] == str2[i]) {
+				continue;
+			} else {
+				// printf("ELSE IF - %d\n", (int) (str1[i] - str2[i]));
+				return (int) (str1[i] - str2[i]);
+			}
+		}
+	} else {
+		for (int i = 0; i < ((int) sizeof(str2)); ++i) {
+			if (str1[i] == str2[i]) {
+				continue;
+			} else {
+				// printf("ELSE - %d\n", (int) (str1[i] - str2[i]));
+				return (int) (str1[i] - str2[i]);
+			}
+		}
 	}
 	return 0;
 }

@@ -5,8 +5,16 @@ int compare_str(char* str1, char* str2);
 
 
 int main() {
-	char str1[] = "abcd";
-	char str2[] = "abc";
+	char str1[100];
+	printf("Max cap for string lengts is 100\n");
+	printf("First string for comparison - ");
+	scanf("%s", str1);
+
+	char str2[100];
+	printf("Second string - ");
+	scanf("%s", str2);
+	printf("\n");
+
 	int res, res1;
 
 	res = strcmp(str1, str2);
@@ -20,35 +28,21 @@ int main() {
 
 
 int compare_str(char* str1, char* str2) {
-	int len = (int) (sizeof(str1) - sizeof(str2));
-	// printf("%d\n", len);
+	int str1_len = strlen(str1);
+	int str2_len = strlen(str2);
+	int min_len = 0;
 
-	if (len > 0) {
-		for (int i = 0; i < ((int) sizeof(str1)); ++i) {
-			if (str1[i] == str2[i]) {
-				continue;
-			} else {
-				// printf("First IF - %d\n", (int) (str1[i] - str2[i]));
-				return (int) (str1[i] - str2[i]);
-			}
-		}
-	} else if (len < 0) {
-		for (int i = 0; i < ((int) sizeof(str2)); ++i) {
-			if (str1[i] == str2[i]) {
-				continue;
-			} else {
-				// printf("ELSE IF - %d\n", (int) (str1[i] - str2[i]));
-				return (int) (str1[i] - str2[i]);
-			}
-		}
+	if (str1_len < str2_len) {
+		min_len = str1_len;
 	} else {
-		for (int i = 0; i < ((int) sizeof(str2)); ++i) {
-			if (str1[i] == str2[i]) {
-				continue;
-			} else {
-				// printf("ELSE - %d\n", (int) (str1[i] - str2[i]));
-				return (int) (str1[i] - str2[i]);
-			}
+		min_len = str2_len;
+	}
+
+	for (int i = 0; i < min_len + 1; ++i) {
+		if (str1[i] == str2[i]) {
+			continue;
+		} else {
+			return (int) (str1[i] - str2[i]);
 		}
 	}
 	return 0;

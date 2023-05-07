@@ -1,7 +1,9 @@
+main
 __pycache__/
 .DS_Store
 *.exec
+*.json
 *.exe
 *.dmg
 *.db
-*.json
+*.o

@@ -8,5 +8,3 @@ __pycache__/
 *.dmg
 *.db
 *.o
-strn_cmp.o
-gen_data.o

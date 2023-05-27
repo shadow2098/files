@@ -4,20 +4,11 @@
 
 #include "get_data.h"
 
-
-/*
-Считать данные из файла, 
-	в котором на каждой строке находится никнейм пользователя.
-Посчитать какое количество никнеймов начинается на 
-	заданную последовательность символов 
-		(то есть предполагается 
-			что эту заданную последовательность символов 
-				можно менять в коде)
-*/
 void print_matrix(char** arr, int rows, int cols);
 void read_file(char* file_name, char** arr);
 char** create_matrix(int rows, int cols);
 void free_matrix(char** arr, int rows);
+
 
 
 int main() {
@@ -36,6 +27,8 @@ int main() {
 
     return 0;
 }
+
+
 
 void read_file(char* file_name, char** arr_user) {
     FILE *f = fopen(file_name, "r");

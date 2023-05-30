@@ -2,11 +2,30 @@
 #include <string.h>
 #include <stdlib.h>
 
-void print_matrix(char** matrix, int rows, int cols);
-char** create_matrix(int rows, int cols);
-void free_matrix(char** arr, int rows);
+// void print_matrix(char** matrix, int rows, int cols);
+// char** create_matrix(int rows, int cols);
+// void free_matrix(char** arr, int rows);
 
 int main() {
+
+    int arr[10];
+
+    int len = (int) sizeof(arr) / sizeof(arr[0]);
+
+    printf("%d\n", len);
+
+    for (int i = 0; i < 10; ++i) {
+        arr[i] = i;
+    }
+
+    for (int i = 0; i < 10; ++i) {
+        printf("%d\n", arr[i]);
+    }
+
+    return 0;
+}
+
+    /*
     int rows = 10;
     int cols = 20;
     char** arr = create_matrix(rows, cols);
@@ -17,7 +36,7 @@ int main() {
 
     return 0;
 }
-
+*/
 /*
 	char arr_db[10][20] = {"User1", "User2", "user3", "User4", "User",
 							"user5", "user6", "User7", "Admin", "NONE"};
@@ -38,7 +57,7 @@ int main() {
 	}
 	return 0;
 }
-*/
+
 
 char** create_matrix(int rows, int cols) {
     char** arr = (char**) malloc(rows * sizeof(char));
@@ -67,3 +86,4 @@ void free_matrix(char** arr, int rows) {
     }
     free(arr);
 }
+*/

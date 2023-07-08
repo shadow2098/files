@@ -111,9 +111,11 @@ int* read_file(char* file_name) {
     char* ptr_var = &var;
     while ((var = fgetc(f)) != EOF) {
         arr[i] = atoi(ptr_var);
+        printf("%d\n", arr[i]);
         ++i;
     }
     fclose(f);
+    printf("\n\n\n\n\n\n\n");
     return arr;
 }
 

@@ -40,7 +40,7 @@ int main() {
     print_list(head_ptr);
 
     stats object = link_list_operations(head, arr);
-    printf("Total revenue - %.2f$, amount of gold bars sold - %d\n", object.revenue, object.amount);
+    printf("Total revenue: %.2f$, amount of gold bars sold: %d\n", object.revenue, object.amount);
 
     free_list(head);
     free(arr);
@@ -107,15 +107,14 @@ int* read_file(char* file_name) {
     int* arr = malloc(10 * sizeof(int));
 
     int i = 0;
-    char var;
-    char* ptr_var = &var;
-    while ((var = fgetc(f)) != EOF) {
-        arr[i] = atoi(ptr_var);
+    char arr_char[] = {'\0', '\0'};
+
+    while ((arr_char[0] = fgetc(f)) != EOF) {
+        arr[i] = atoi(arr_char);
         printf("%d\n", arr[i]);
         ++i;
     }
     fclose(f);
-    printf("\n\n\n\n\n\n\n");
     return arr;
 }
 

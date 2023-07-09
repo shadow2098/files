@@ -21,6 +21,7 @@ int* read_file(char* file_name);
 void get_variable(char* var);
 void fill_linked_list(node_t* elem);
 void print_list(node_t* tail);
+void free_list(node_t* tail);
 
 
 int main() {
@@ -30,20 +31,18 @@ int main() {
 
     int* arr = read_file(file_name);
 
-    for (int i = 0; i < 10; ++i) {
-        printf("arr[%d] = %d\n", i, arr[i]);
-    }
-
     node_t* tail = (node_t*) malloc(sizeof(node_t));
-    node_t* tail_ptr = tail;
+    // node_t* tail_ptr = tail;
     fill_linked_list(tail);
-    print_list(tail_ptr);
+    // print_list(tail_ptr);
 
     stats object = link_list_operations(tail, arr);
 
-    printf("stats link_list_operations(node_t* elem, int* arr) complete %.2f\n", object.revenue);
+    printf("Gold bars sold: %d | Gold bars bought: %d | Total revenue: %.2f\n", object.sold, object.bought, object.revenue);
 
     free(arr);
+    free_list(tail);
+    printf("\n\nlinked list is freed\n");
     return 0;
 }
 
@@ -59,10 +58,9 @@ stats link_list_operations(node_t* elem, int* arr) {
     for (int i = 0; i < 10; ++i) {
         if (arr[i] < 0) {
             status = 1;
-            // arr[i] = -arr[i] / 11;
         }
         if (status == 1) {
-            for (int j = 0; j < -arr[i] / 11; ++j) {
+            for (int j = 0; j < -arr[i]; ++j) {
                 if (elem->prev == NULL) {
                     err = 1;
                     break;
@@ -82,11 +80,11 @@ stats link_list_operations(node_t* elem, int* arr) {
                 printf("Not enough revenue to purchase gold bars\n");
                 break;
             }
-            object.bought += -arr[i] / 11;
+            object.bought += -arr[i];
+            status = 0;
         }
-
         else {
-            for (int j = 0; j < arr[i] / 11; ++j) {
+            for (int j = 0; j < arr[i]; ++j) {
                 if (elem->next == NULL) {
                     err = 1;
                     break;
@@ -98,22 +96,19 @@ stats link_list_operations(node_t* elem, int* arr) {
                 printf("Linked list ended\n");
                 break;
             }
-            object.sold += arr[i] / 11;
+            object.sold += arr[i];
         }
-
     }
     return object;
 }
 
 
 void fill_linked_list(node_t* elem) {
-    // node_t* ptr = elem;
     elem->prev = NULL;
     for (int i = 0; i < 20; ++i) {
         elem->val = 1000 + i * 11.4;
         elem->next = (node_t*) malloc(sizeof(node_t));
         elem->next->prev = elem;
-        // ptr = elem->next;
 
         elem = elem->next;
     }
@@ -127,7 +122,6 @@ void get_variable(char* var) {
     fclose(f);
 }
 
-// sscanf(s, "%d", &x);
 
 int* read_file(char* file_name) {
     FILE* f = fopen(file_name, "r");
@@ -136,28 +130,19 @@ int* read_file(char* file_name) {
     int i = 0;
     int status = 0;
     int ascii = 0;
-    char var;
-    // char* ptr_var = &var;
+    char arr_char[] = {'\0', '\0'};
 
-    while ((var = fgetc(f)) != EOF) {
-       ascii = (int) var;
+    while ((arr_char[0] = fgetc(f)) != EOF) {
+        ascii = (int) arr_char[0];
         if (ascii < 49) {
             status = 1;
             continue;
         }
-
         if (status == 1) {
-            // status = (int) (var) + 0;
-            // sscanf(ptr_var, "%d", &status);
-            // status = strtol(ptr_var, &ptr_var, 10);
-            status = atoi(&var);
-            printf("%c %d\n", var, status);
+            status = atoi(arr_char);
             arr[i] = -status;
         } else {
-            // status = (int) (var) + 0;
-            // sscanf(ptr_var, "%d", &status);
-            // status = strtol(ptr_var, &ptr_var, 10);
-            status = atoi(&var);
+            status = atoi(arr_char);
             arr[i] = status;
         }
         status = 0;
@@ -174,5 +159,16 @@ void print_list(node_t* tail) {
     while (elem -> next != NULL) {
         printf("%.2f\n", elem->val);
         elem = elem->next;
+    }
+}
+
+
+void free_list(node_t* tail) {
+   node_t* elem;
+
+   while (tail != NULL) {
+       elem = tail;
+       tail = tail->next;
+       free(elem);
     }
 }
